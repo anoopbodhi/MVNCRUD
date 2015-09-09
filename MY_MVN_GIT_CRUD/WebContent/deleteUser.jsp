@@ -1,11 +1,7 @@
-<%
-	
-response.setHeader("Cache-Control","no-cache");
-response.setHeader("Cache-Control","no-store");
-response.setHeader("Pragma","no-cache");
-response.setDateHeader ("Expires", 0);
+<%@ include file="block_browserback.jsp"%>
 
-session.setMaxInactiveInterval(1*60);
+<%
+//session.setMaxInactiveInterval(1*60);
 
 String fname=(String)session.getAttribute("fname");
 	if(fname==null)

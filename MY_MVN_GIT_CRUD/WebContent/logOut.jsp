@@ -1,10 +1,10 @@
 <%
 	
 Cookie ck=new Cookie("username", "");
-ck.setMaxAge(24*60*60);
+ck.setMaxAge(0);
 
 Cookie ck1=new Cookie("password","");
-ck1.setMaxAge(24*60*60);
+ck1.setMaxAge(0);
 
 response.addCookie(ck);
 response.addCookie(ck1);
@@ -15,6 +15,7 @@ response.addCookie(ck1);
 	response.setHeader("Cache-Control","no-store");
 	response.setHeader("Pragma","no-cache");
 	response.setDateHeader ("Expires", 0);
+	
 	response.sendRedirect("index.jsp");
 
 %>

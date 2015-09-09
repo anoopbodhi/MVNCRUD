@@ -1,12 +1,5 @@
+<%@ include file="block_browserback.jsp"%>
 <%
-	
-response.setHeader("Cache-Control","no-cache");
-response.setHeader("Cache-Control","no-store");
-response.setHeader("Pragma","no-cache");
-response.setDateHeader ("Expires", 0);
-
-session.setMaxInactiveInterval(1*60);
-
 	String fname=(String)session.getAttribute("fname");
 
 	if(fname==null)
@@ -15,6 +8,8 @@ session.setMaxInactiveInterval(1*60);
 	}
 	else
 	{
+		
+		
 %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -34,5 +29,6 @@ session.setMaxInactiveInterval(1*60);
 </body>
 </html>
 <%
-}
+
+	}
 %>
