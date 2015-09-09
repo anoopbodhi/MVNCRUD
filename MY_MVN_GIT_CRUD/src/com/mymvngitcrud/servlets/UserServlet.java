@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,11 +78,35 @@ public class UserServlet extends HttpServlet {
 			user.setUSERNAME(request.getParameter("USERNAME"));
 			user.setPASSWORD(request.getParameter("PASSWORD"));
 			
+			String remember_me=request.getParameter("remember_me");
+			
+			//System.out.println("remember_me="+remember_me);
+			
+			
+			
 			user=new UserRepository().loginCheck(user);
 			
 			if(user!=null)
 			{
 				session.setAttribute("fname",user.getFNAME());
+				
+				//----------Adding cookies to response----------------
+				
+				if(remember_me!=null)
+				{
+					Cookie ck=new Cookie("username", user.getUSERNAME());
+					ck.setMaxAge(24*60*60);
+					
+					Cookie ck1=new Cookie("password", user.getPASSWORD());
+					ck1.setMaxAge(24*60*60);
+					
+					response.addCookie(ck);
+					response.addCookie(ck1);
+					
+					System.out.println("cookies added ***************************************");
+				}	
+			   //---------------------------------------------------
+				
 				response.sendRedirect("Home.jsp");
 			}
 			else

@@ -5,10 +5,12 @@ response.setHeader("Cache-Control","no-store");
 response.setHeader("Pragma","no-cache");
 response.setDateHeader ("Expires", 0);
 
+session.setMaxInactiveInterval(1*60);
+
 String fname=(String)session.getAttribute("fname");
 	if(fname==null)
 	{
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index.jsp?_session=expired");
 	}
 	else
 	{
@@ -23,6 +25,26 @@ String fname=(String)session.getAttribute("fname");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script language="javascript">
+function val()
+{
+	
+	var admin="anoop";
+	
+		if((document.deleteuser.fname.value)!=admin)
+		{
+		alert("SORRY !!! Accedd Denied You cant delete");
+		}
+		else
+		{
+			document.deleteuser.submit();
+		}
+}
+
+
+</script>
+
+
 </head>
 <body>
 <%
@@ -35,7 +57,7 @@ String fname=(String)session.getAttribute("fname");
 <p><a href="updateUser_1.jsp">EDIT</a></p>
 <p><a href="logOut.jsp">LOGOUT</a></p>
 
-<form name="delete" action="UserServlet" method="post">
+<form name="deleteuser" action="UserServlet" method="post">
 <input type="hidden" name="USER_ACTION" value="DELETE">
 <table border="1" align="center">
 <tr>
@@ -70,7 +92,8 @@ String fname=(String)session.getAttribute("fname");
 
 </table>
 
-<p align="center"><input type="submit" value="REMOVE"></p>
+<input type="hidden" name="fname" value="<%=session.getAttribute("fname")%>">
+<p align="center"><input type="button" value="REMOVE" onclick="val()"></p>
 </form>
 
 

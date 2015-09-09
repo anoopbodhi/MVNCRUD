@@ -4,10 +4,13 @@ response.setHeader("Cache-Control","no-cache");
 response.setHeader("Cache-Control","no-store");
 response.setHeader("Pragma","no-cache");
 response.setDateHeader ("Expires", 0);
+
+session.setMaxInactiveInterval(1*60);
+
 String fname=(String)session.getAttribute("fname");
 	if(fname==null)
 	{
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index.jsp?_session=expired");
 	}
 	else
 	{
@@ -59,7 +62,7 @@ String fname=(String)session.getAttribute("fname");
 		<td><%=user.getPASSWORD() %></td>
 		
 	
-		<td><a href="updateUser_2.jsp?id=<%=user.getId() %>">EDIT</a></td>
+		<td><a href="updateUser_2.jsp?id=<%=user.getId() %>"><img src="images/edit.png" height="40" width="40"></a></td>
 		
 		</tr>
 <%		

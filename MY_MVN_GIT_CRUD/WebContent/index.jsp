@@ -13,8 +13,29 @@
 <p>PASSWORD :<input type="password" name="PASSWORD"></p>
 <p><input type="submit" value="LOGIN"></p>
 <p>New User ? <a href="signUp.jsp">Sign Up Here</a></p>
+<p>Remember Me <input type="checkbox" name="remember_me" value="ok"></p>
 
 </form>
+<font color="red"> 
+<%
+	try{
+		
+		String _session=request.getParameter("_session");
+		if(_session.equals("expired"))
+		{
+			out.println("Session Expired !!! Please Login Again !!!");
+		}
+		else
+		{
+			out.println("");
+		}
+		
+	}catch(Exception e)
+	{
+		
+	}
 
+%>
+</font>
 </body>
 </html>
